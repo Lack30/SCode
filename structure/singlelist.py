@@ -28,29 +28,24 @@ class Node:
         return self.__str__()
 
 
-class Llink():
-    def __init__(self, max):
-        self.max = max
+class SingleList():
+    def __init__(self):
         self._length = 0
         self.head = None
 
-    def length(self):
-        return self._length
 
     def is_empty(self):
         return self._length == 0 and self.head is None
 
     def lpush(self, value):
         """头部添加元素"""
-        if self._length >= self.max:
-            raise ValueError("link already full")
         self._length += 1
         self.head = Node(value, self.head)
 
     def lpop(self):
         """删除头部"""
         if self.head is None:
-            raise IndexError("link is empty")
+            raise IndexError("single list is empty")
         self._length -= 1
         e = self.head.elem
         self.head = self.head.next
@@ -58,8 +53,6 @@ class Llink():
 
     def push(self, value):
         """尾部添加元素"""
-        if self._length >= self.max:
-            raise ValueError("link already full")
         self._length += 1
         # 第一种情况，如果链表为空，直接添加头部
         if self.head is None:
@@ -75,7 +68,7 @@ class Llink():
         """尾部删除元素"""
         # 空表报错
         if self.head is None:
-            raise IndexError("link is empty")
+            raise IndexError("single list is empty")
         self._length -= 1
         p = self.head
         # 链表中只有一个元素
@@ -92,37 +85,37 @@ class Llink():
     def index(self, value):
         """输出元素在表中的位置"""
         if self.head is None:
-            raise ValueError("{} is not in link".format(value))
+            raise ValueError("{} is not in single list".format(value))
         n = 0
+        if self.head.elem == value:
+            return n
         p = self.head
         while p.next is not None:
-            if p.elem == value:
-                return n
             n += 1
             p = p.next
-        raise ValueError("{} is not in link".format(value))
+            if p.elem == value:
+                return n
+        raise ValueError("{} is not in single list".format(value))
 
     def insert(self, index, value):
         """在指定位置插入元素"""
-        if self._length >= self.max:
-            raise ValueError("link already full")
-        if i < 0 or i > self._length-1:
-            raise IndexError("link out of range")
+        if index < 0 or index > self._length-1:
+            raise IndexError("single list out of range")
         self._length += 1
         if index == 0 and self.head is None:
             self.head = Node(value)
             return
         p = self.head
-        for i in range(i):
+        for i in range(index):
             p = p.next
         p.next = Node(value, p.next)
 
     def remove(self, index):
         """删除指定位置的元素"""
-        if i < 0 or i > self._length-1:
-            raise IndexError("link out of range")
+        if index < 0 or index > self._length-1:
+            raise IndexError("single list out of range")
         if self.head is None:
-            raise IndexError("link is empty")
+            raise IndexError("single list is empty")
         self._length -= 1
         p = self.head
         for i in range(index-1):
@@ -130,6 +123,23 @@ class Llink():
         e = p.next.elem
         p.next = p.next.next
         return e
+
+    def reverse(self):
+        """链表反转"""
+        if self.head is None:
+            return
+        dummp = Node(-1, self.head)
+        prev = dummp.next
+        pcur = prev.next
+        while pcur is not None:
+            prev.next = pcur.next
+            pcur.next = dummp.next
+            dummp.next = pcur
+            pcur = prev.next
+        self.head = dummp.next
+
+    def __len__(self):
+        return self._length
 
     def __repr__(self):
         l = []

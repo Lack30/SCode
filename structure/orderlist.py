@@ -7,25 +7,34 @@ Python 中有一个自带的数据类型，就是list，它就是顺序表的一
 """
 
 
-class List(object):
+class OrderList(object):
     """定义顺序表类"""
 
-    def __init__(self, max):
-        """初始化，定义表的最大值"""
+    def __init__(self):
+        """初始化"""
         self._elems = []
         self._length = 0
-        self._max = max
+
+    def lpush(self, value):
+        """头部添加元素"""
+        self._length += 1
+        self._elems = [value] + self._elems
+
+    def lpop(self):
+        """头部删除元素"""
+        self._length -= 1
+        self._elems = self._elems[1:]
 
     def push(self, value):
         """尾部添加元素"""
-        if self._length == self._max:
-            raise TypeError("push value faild: list already fill")
+        self._length += 1
         self._elems.append(value)
 
     def pop(self):
         """尾部删除元素"""
-        if _length == 0:
-            raise TypeError("pop faild: list is empty")
+        if self._length == 0:
+            raise ValueError("list is empty")
+        self._length -= 1
         self._elems.pop()
 
     def index(self, value):
@@ -37,18 +46,32 @@ class List(object):
             n += 1
         raise ValueError("{} is not in list".format(value))
 
-    def insert(self, key, value):
+    def insert(self, index, value):
         """指定位置插入元素"""
-        if self._length == self._max:
-            raise TypeError("index value faild: list already fill")
-        if key < 0 or key > self._length-1:
-            raise TypeError("insert faild: range out of list")
-        self._elems = self._elems[0:key] + value + self._elems[key+1:-1]
+        if index < 0 or index > self._length-1:
+            raise IndexError("range out of list")
+        self._elems = self._elems[0:index] + [value] + self._elems[index:]
+
+    def remove(self, index):
+        """删除指定位置元素"""
+        if index < 0 or index > self._length - 1:
+            raise IndexError("range out of list")
+        e = self._elems[index]
+        self._elems = self._elems[0:index] + self._elems[index+1:]
+        return e
 
     def clear(self):
         """清空表"""
         self._elems = []
         self._length = 0
+
+
+    def reverse(self):
+        """顺序表反转"""
+        self._elems.reverse()
+
+    def sort(self):
+        self._elems.sort()
 
     def __len__(self):
         return self._length
@@ -58,4 +81,3 @@ class List(object):
 
     def __str__(self):
         return self.__repr__()
-
