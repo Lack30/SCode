@@ -16,10 +16,6 @@ class List(object):
         self._length = 0
         self._max = max
 
-    def len(self):
-        """输入表的大小"""
-        return self._length
-
     def push(self, value):
         """尾部添加元素"""
         if self._length == self._max:
@@ -54,8 +50,12 @@ class List(object):
         self._elems = []
         self._length = 0
 
+    def __len__(self):
+        return self._length
+
     def __repr__(self):
         return str(self._elems)
 
     def __str__(self):
         return self.__repr__()
+
