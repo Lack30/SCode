@@ -7,8 +7,7 @@ Python 中有一个自带的数据类型，就是list，它就是顺序表的一
 """
 
 class List(object):
-    """定义顺序表类
-    """
+    """定义顺序表类"""
     def __init__(self, max):
         """初始化，定义表的最大值"""
         self._elems = []
@@ -49,6 +48,12 @@ class List(object):
         """清空表"""
         self._elems = []
         self._length = 0
+
+    def __repr__(self):
+        return str(self._elems)
+
+    def __str__(self):
+        return self.__repr__()
 
 
     
