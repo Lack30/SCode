@@ -6,8 +6,10 @@
 Python 中有一个自带的数据类型，就是list，它就是顺序表的一种实现。
 """
 
+
 class List(object):
     """定义顺序表类"""
+
     def __init__(self, max):
         """初始化，定义表的最大值"""
         self._elems = []
@@ -17,7 +19,7 @@ class List(object):
     def len(self):
         """输入表的大小"""
         return self._length
-    
+
     def push(self, value):
         """尾部添加元素"""
         if self._length == self._max:
@@ -30,17 +32,20 @@ class List(object):
             raise TypeError("pop faild: list is empty")
         self._elems.pop()
 
-    def index(self, key):
-        """查看指定位置的元素"""
-        if key < 0 or key > self._length:
-            raise TypeError("index faild: range out of list")
-        return self._elems[index]
+    def index(self, value):
+        """查看元素在表中的位置"""
+        n = 0
+        for i in self._elems:
+            if i == value:
+                return n
+            n += 1
+        raise ValueError("{} is not in list".format(value))
 
     def insert(self, key, value):
         """指定位置插入元素"""
         if self._length == self._max:
             raise TypeError("index value faild: list already fill")
-        if key < 0 or key > self._length:
+        if key < 0 or key > self._length-1:
             raise TypeError("insert faild: range out of list")
         self._elems = self._elems[0:key] + value + self._elems[key+1:-1]
 
@@ -54,6 +59,3 @@ class List(object):
 
     def __str__(self):
         return self.__repr__()
-
-
-    
