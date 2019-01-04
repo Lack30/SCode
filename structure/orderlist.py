@@ -15,17 +15,17 @@ class OrderList(object):
         self._elems = []
         self._length = 0
 
-    def lpush(self, value):
+    def prepend(self, value):
         """头部添加元素"""
         self._length += 1
         self._elems = [value] + self._elems
 
-    def lpop(self):
+    def shift(self):
         """头部删除元素"""
         self._length -= 1
         self._elems = self._elems[1:]
 
-    def push(self, value):
+    def append(self, value):
         """尾部添加元素"""
         self._length += 1
         self._elems.append(value)

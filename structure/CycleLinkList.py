@@ -4,14 +4,14 @@
 """
 from .singlelist import Node
 
-class CycleList:
+class CycleLinkList:
     def __init__(self):
         self.rear = None
 
     def is_empty(self):
         return self.rear is None
 
-    def lpush(self, value):
+    def prepend(self, value):
         """前端插入"""
         p = Node(value)
         if self.rear is None: 
@@ -21,7 +21,7 @@ class CycleList:
             p.next = self.rear.next
             self.rear.next = p
 
-    def push(self, value):
+    def append(self, value):
         """尾端插入"""
         self.lpush(value)
         self.rear = self.rear.next
@@ -40,7 +40,7 @@ class CycleList:
             self.rear = p
         return p.elem
 
-    def lpop(self):
+    def shift(self):
         """前端弹出"""
         if self.rear is None:
             raise IndexError("in lpop of CycleList")

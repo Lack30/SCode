@@ -4,19 +4,19 @@
 """
 from .singlelist import SingleList
 
-class ProSingleList(SingleList):
+class ProSingleLinkList(SingleList):
     def __init__(self):
         super(SingleList, self).__init__()
         self.rear = None
 
-    def lpush(self, value):
+    def prepend(self, value):
         if self.head is None:
             self.head = Node(value, self.head)
             self.rear = self.head
         else:
             self.head = Node(value, self.head)
 
-    def push(self, value):
+    def append(self, value):
         if self.head is None:
             self.head = Node(value, self.head)
             self.rear = self.head

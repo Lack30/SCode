@@ -28,7 +28,7 @@ class Node:
         return self.__str__()
 
 
-class SingleList():
+class SingleLinkList():
     def __init__(self):
         self._length = 0
         self.head = None
@@ -37,12 +37,12 @@ class SingleList():
     def is_empty(self):
         return self._length == 0 and self.head is None
 
-    def lpush(self, value):
+    def prepend(self, value):
         """头部添加元素"""
         self._length += 1
         self.head = Node(value, self.head)
 
-    def lpop(self):
+    def shift(self):
         """删除头部"""
         if self.head is None:
             raise IndexError("single list is empty")
@@ -51,7 +51,7 @@ class SingleList():
         self.head = self.head.next
         return e
 
-    def push(self, value):
+    def append(self, value):
         """尾部添加元素"""
         self._length += 1
         # 第一种情况，如果链表为空，直接添加头部
