@@ -25,3 +25,5 @@ test/
 *pycache*
 venv/
 package.json
+
+app.py
