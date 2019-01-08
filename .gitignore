@@ -21,7 +21,7 @@ test/
 
 *.pyc
 *.pyo
-
+__pycache__
 *pycache*
 venv/
 package.json
