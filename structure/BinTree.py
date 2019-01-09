@@ -27,3 +27,74 @@
 4.如果结点度为1，则该结点只有左孩子，即不存在只有右孩子树的情况。
 5.同样节点树的二叉树，完全二叉树的深度最小。
 """
+
+
+class BinTNode:
+    def __init__(self, data, left=None, right=None):
+        self.data = data
+        self.left = left
+        self.right = right
+
+
+class BinTree:
+    def __init__(self):
+        self.root = None
+
+    def append(self, data):
+        node = BinTNode(data)
+        if self.root is None:
+            self.root = node
+        else:
+            q = [self.root]
+
+            while True:
+                pop_node = q.pop(0)
+                if pop_node.left is None:
+                    pop_node.left = node
+                    return
+                elif pop_node.right is None:
+                    pop_node.right = node
+                    return
+                else:
+                    q.append(pop_node.left)
+                    q.append(pop_node.right)
+
+    def traverse(self):  # 层次遍历
+        if self.root is None:
+            return None
+        q = [self.root]
+        res = [self.root.data]
+        while len(q) == 0:
+            pop_node = q.pop(0)
+            if pop_node.left is not None:
+                q.append(pop_node.left)
+                res.append(pop_node.left.data)
+
+            if pop_node.right is not None:
+                q.append(pop_node.right)
+                res.append(pop_node.right.data)
+        return res
+
+    def preorder(self, root):  # 先序遍历
+        if root is None:
+            return []
+        result = [root.data]
+        left = self.preorder(root.left)
+        right = self.preorder(root.right)
+        return result + left + right
+
+    def inorder(self, root):  # 中序遍历
+        if root is None:
+            return []
+        result = [root.data]
+        left = self.inorder(root.left)
+        right = self.inorder(root.right)
+        return left + result + right
+
+    def postorder(self, root):  # 后序遍历
+        if root is None:
+            return []
+        result = [root.data]
+        left = self.postorder(root.left)
+        right = self.postorder(root.right)
+        return left + right + result
