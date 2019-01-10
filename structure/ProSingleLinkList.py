@@ -2,11 +2,11 @@
 这里简单的变形，在内部添加一个指向尾部的节点，解决单链表尾部插入时
 麻烦的问题
 """
-from .singlelist import SingleList
+from .SingleLinkList import SingleLinkList, Node
 
-class ProSingleLinkList(SingleList):
+class ProSingleLinkList(SingleLinkList):
     def __init__(self):
-        super(SingleList, self).__init__()
+        super().__init__(self)
         self.rear = None
 
     def prepend(self, value):
