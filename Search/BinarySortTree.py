@@ -1,3 +1,12 @@
+"""二叉排序树
+二傻排序树是一种在结点里存储数据的二叉树。一棵二叉排序树或者为空，
+或者具有以下性质：
+    其根结点保存着一个数据项。
+    如果其左子树不为空，那么其左子树的所有结点保存的值均小于它根节点保存的值。
+    如果其右子树不为空，那么其右子树的所有结点保存的值均大于它根结点保存的值。
+    非空的左子树或右子树也是二叉排序树。
+"""
+
 class Node:
     def __init__(self, data, left=None, right=None):
         self.data = data
@@ -5,7 +14,7 @@ class Node:
         self.right = right
 
 
-class DictBinTree:
+class BinSortTree:
     def __init__(self):
         self.root = None
 
@@ -128,7 +137,7 @@ class DictBinTree:
 
 if __name__ == '__main__':
     lis = [62, 58, 88, 47, 73, 99, 35, 51, 93, 37]
-    bs_tree = DictBinTree()
+    bs_tree = BinSortTree()
     for i in range(len(lis)):
         bs_tree.insert(lis[i])
     bs_tree.delete(73)
